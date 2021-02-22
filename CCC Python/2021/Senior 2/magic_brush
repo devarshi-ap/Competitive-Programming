@@ -1,0 +1,44 @@
+def paintRow(matrix, rowNum):
+    for i in matrix[rowNum]:
+        if i == "B":
+            matrix[rowNum][matrix[rowNum].index(i)] = "G"
+        elif i == "G":
+            matrix[rowNum][matrix[rowNum].index(i)] = "B"
+    return matrix
+
+
+def paintColumn(matrix, colNum):
+    for i in range(len(matrix)):
+        for j in matrix[i][colNum]:
+            if j == "B":
+                matrix[i][colNum] = "G"
+            elif j == "G":
+                matrix[i][colNum] = "B"
+    return matrix
+
+
+# M-by-N canvas
+m = int(input())  # row
+n = int(input())  # column
+k = int(input())  # number of choices
+canvas = [["B" for col in range(n)] for row in range(m)]
+print(canvas)
+
+
+choices = []
+for i in range(k):
+    c = str(input())
+    choices.append(c)
+
+
+for ch in choices:
+    rc = ch[0]
+    rcNum = int(ch[2])
+
+    if rc == "R":
+        paintRow(canvas, rcNum-1)
+    elif rc == "C":
+        paintColumn(canvas, rcNum-1)
+    print(canvas)
+
+print(sum(x.count("G") for x in canvas))
